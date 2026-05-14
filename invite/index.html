@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game Collection Manager – Invite</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      text-align: center;
+      padding: 1rem;
+    }
+    .card {
+      background: #1e293b;
+      border: 1px solid #7c3aed44;
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 400px;
+    }
+    h1 { color: #a78bfa; margin-top: 0; }
+    p { color: #94a3b8; line-height: 1.6; }
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #7c3aed, #4f46e5);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.75rem;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🎮 Game Collection Manager</h1>
+    <p id="msg">Opening the app…</p>
+    <a id="fallback" class="btn" style="display:none" href="#">Open app</a>
+  </div>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var token = params.get('token');
+      if (!token) {
+        document.getElementById('msg').textContent = 'Invalid invite link.';
+        return;
+      }
+      var deepLink = 'gamecollection://invite?token=' + encodeURIComponent(token);
+      // Try to open the app
+      window.location.href = deepLink;
+      // After a short delay, show a fallback if app didn't open
+      setTimeout(function () {
+        document.getElementById('msg').textContent =
+          'If the app did not open, make sure Game Collection Manager is installed.';
+        var btn = document.getElementById('fallback');
+        btn.href = deepLink;
+        btn.style.display = 'inline-block';
+      }, 1500);
+    })();
+  </script>
+</body>
+</html>
