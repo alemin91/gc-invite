@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Videogame Collectors Binder – Invito</title>
+
+  <!-- Open Graph / WhatsApp preview -->
+  <meta property="og:type"         content="website" />
+  <meta property="og:site_name"    content="Videogame Collectors Binder" />
+  <meta property="og:title"        content="Videogame Collectors Binder – Condivido la mia collezione" />
+  <meta property="og:description"  content="Un amico vuole condividere con te la sua collezione di videogiochi. Apri il link per vederla nell'app." />
+  <meta property="og:image"        content="https://alemin91.github.io/gc-invite/invite/og-mine.png" />
+  <meta property="og:image:alt"    content="Videogame Collectors Binder" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url"          content="https://alemin91.github.io/gc-invite/invite/mine" />
+  <meta name="twitter:card"        content="summary_large_image" />
+
+  <style>
+    :root { color-scheme: dark; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: radial-gradient(120% 120% at 50% 0%, #1e1b4b 0%, #0f172a 60%); color: #e2e8f0; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; text-align: center; padding: 1rem; }
+    .card { background: #1e293b; border: 1px solid #7c3aed55; border-radius: 1.25rem; padding: 2.25rem 2rem; max-width: 420px; box-shadow: 0 20px 60px rgba(124, 58, 237, 0.18); }
+    h1 { color: #a78bfa; margin: 0 0 .5rem; font-size: 1.4rem; letter-spacing: -.5px; }
+    p { color: #94a3b8; line-height: 1.6; margin: .5rem 0; }
+    .btn { display: inline-block; background: linear-gradient(135deg, #7c3aed, #4f46e5); color: white; padding: 0.8rem 1.6rem; border-radius: 0.85rem; text-decoration: none; font-weight: 600; margin-top: 1.25rem; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🎮 Videogame Collectors Binder</h1>
+    <p id="msg">Apertura dell'app in corso…</p>
+    <a id="fallback" class="btn" style="display:none" href="#">Apri l'app</a>
+  </div>
+  <script>
+    (function () {
+      var token = new URLSearchParams(window.location.search).get('token');
+      var msg = document.getElementById('msg');
+      if (!token) { msg.textContent = 'Link di invito non valido.'; return; }
+      var deepLink = 'gamecollection://invite?token=' + encodeURIComponent(token);
+      window.location.href = deepLink;
+      setTimeout(function () {
+        msg.textContent = "Se l'app non si è aperta, assicurati di avere installato Videogame Collectors Binder.";
+        var btn = document.getElementById('fallback');
+        btn.href = deepLink; btn.style.display = 'inline-block';
+      }, 1500);
+    })();
+  </script>
+</body>
+</html>
